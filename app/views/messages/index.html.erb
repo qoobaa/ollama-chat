@@ -1,0 +1,27 @@
+<h1>
+  <%= link_to chats_path, class: "text-decoration-none" do %>
+    <i class="bi bi-arrow-left"></i>
+  <% end %>
+  Chat <%= @chat.id %>
+</h1>
+
+<%= turbo_stream_from @chat %>
+
+<ul class="list-group">
+  <%= turbo_frame_tag "messages" do %>
+    <% if @messages.empty? %>
+      <li class="list-group-item text-muted">No messages yet</li>
+    <% else %>
+      <% @messages.each do |message| %>
+        <%= render message %>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= form_with model: [@chat, Message.new] do |form| %>
+  <div class="input-group">
+    <%= form.text_field :body, autocomplete: "off", class: "form-control", required: true %>
+    <%= form.submit "Send", class: "btn btn-success" %>
+  </div>
+<% end %>

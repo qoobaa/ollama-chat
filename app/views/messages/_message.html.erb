@@ -1,0 +1,7 @@
+<li class="list-group-item placeholder-glow" id="<%= dom_id(message) %>">
+  <% if message.body.present? %>
+    <%= message.body %>
+  <% else %>
+    <span class="placeholder" style="width: 10px"></span>
+  <% end %>
+</li>

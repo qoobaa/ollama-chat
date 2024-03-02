@@ -1,0 +1,18 @@
+<h1>Chats</h1>
+
+<% if @chats.empty? %>
+  <p class="text-muted">No chats yet</p>
+<% else %>
+  <% @chats.each do |chat| %>
+    <ul>
+      <li>
+        <%= link_to "Chat ##{chat.id}", chat_messages_path(chat) %>
+        <%= link_to chat_path(chat), class: "btn btn-sm btn-danger", data: { turbo_method: "delete", turbo_confirm: "Are you sure?" } do %>
+          <i class="bi bi-trash"></i>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
+
+<%= link_to "New chat", new_chat_path, class: "btn btn-success" %>
