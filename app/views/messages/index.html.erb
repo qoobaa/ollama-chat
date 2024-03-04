@@ -9,19 +9,15 @@
 
 <ul class="list-group">
   <%= turbo_frame_tag "messages" do %>
-    <% if @messages.empty? %>
-      <li class="list-group-item text-muted">No messages yet</li>
-    <% else %>
-      <% @messages.each do |message| %>
-        <%= render message %>
-      <% end %>
+    <% @messages.each do |message| %>
+      <%= render message %>
     <% end %>
   <% end %>
 </ul>
 
 <%= form_with model: [@chat, Message.new] do |form| %>
   <div class="input-group">
-    <%= form.text_field :body, autocomplete: "off", class: "form-control", required: true %>
+    <%= form.text_field :content, autocomplete: "off", class: "form-control", required: true %>
     <%= form.submit "Send", class: "btn btn-success" %>
   </div>
 <% end %>

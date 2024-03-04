@@ -1,7 +1,9 @@
-<li class="list-group-item placeholder-glow" id="<%= dom_id(message) %>">
-  <% if message.body.present? %>
-    <%= message.body %>
+<li class="list-group-item" id="<%= dom_id(message) %>">
+  <% if message.content.present? %>
+    <%= message.content %>
   <% else %>
-    <span class="placeholder" style="width: 10px"></span>
+    <div class="spinner-border spinner-border-sm" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   <% end %>
 </li>

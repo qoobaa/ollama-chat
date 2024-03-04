@@ -7,10 +7,9 @@ class MessagesController < ApplicationController
 
   def create
     return if @chat.generating?
-    @message = @chat.messages.create!(message_params)
-    @chat.update!(generating: true)
-    GenerateJob.perform_later(@chat)
-    redirect_to chat_messages_path(@chat)
+    @message = @chat.messages.create!(role: "user", **message_params)
+    ChatJob.perform_later(@chat)
+    GenerateChatTitleJob.perform_later(@chat) unless @chat.title.present?
   end
 
   private
@@ -20,6 +19,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:content)
   end
 end

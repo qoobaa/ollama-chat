@@ -6,7 +6,7 @@
   <% @chats.each do |chat| %>
     <ul>
       <li>
-        <%= link_to "Chat ##{chat.id}", chat_messages_path(chat) %>
+        <%= link_to chat.title || "Chat ##{chat.id}", chat_messages_path(chat) %>
         <%= link_to chat_path(chat), class: "btn btn-sm btn-danger", data: { turbo_method: "delete", turbo_confirm: "Are you sure?" } do %>
           <i class="bi bi-trash"></i>
         <% end %>
